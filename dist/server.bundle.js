@@ -72,25 +72,10 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = "./civ-clone-node.ts");
+/******/ 	return __webpack_require__(__webpack_require__.s = "./server/app.ts");
 /******/ })
 /************************************************************************/
 /******/ ({
-
-/***/ "./civ-clone-node.ts":
-/*!***************************!*\
-  !*** ./civ-clone-node.ts ***!
-  \***************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-exports.__esModule = true;
-__webpack_require__(/*! ./server/app */ "./server/app.ts");
-
-
-/***/ }),
 
 /***/ "./server/app.ts":
 /*!***********************!*\
@@ -103,9 +88,11 @@ __webpack_require__(/*! ./server/app */ "./server/app.ts");
 
 exports.__esModule = true;
 var express = __webpack_require__(/*! express */ "express");
+var path = __webpack_require__(/*! path */ "path");
 var app = express();
+app.use(express.static('client'));
 app.get('/', function (req, res) {
-    res.send('Hello World');
+    res.sendFile(path.resolve("client/index.html"));
 });
 var server = app.listen(3000, function () {
     var host = server.address().address;
@@ -125,7 +112,18 @@ var server = app.listen(3000, function () {
 
 module.exports = require("express");
 
+/***/ }),
+
+/***/ "path":
+/*!***********************!*\
+  !*** external "path" ***!
+  \***********************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("path");
+
 /***/ })
 
 /******/ });
-//# sourceMappingURL=bundle.js.map
+//# sourceMappingURL=server.bundle.js.map

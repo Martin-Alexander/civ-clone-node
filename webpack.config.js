@@ -1,14 +1,19 @@
 const path = require('path');
 const nodeExternals = require('webpack-node-externals');
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
+
 
 const config = {
-  entry: "./civ-clone-node.ts",
+  entry: {
+    server: "./server/app.ts",
+    client: "./client/index.ts"
+  },
   output: {
     path: path.resolve(__dirname, "dist"),
-    filename: "bundle.js"
+    filename: "[name].bundle.js"
   },
   resolve: {
-    extensions: [".ts", ".js"],
+    extensions: [".ts", ".js", "css", "scss"],
   },
   module: {
     rules: [
@@ -21,10 +26,38 @@ const config = {
         test: /.tsx?$/,
         exclude: /node_modules/,
         use: "ts-loader"
+      },
+      {
+        test: /\.scss$/,
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: [
+            {
+              loader: 'css-loader',
+              options: { minimize: true }
+            },
+            {
+              loader: 'sass-loader',
+              options: { minimize: true }
+            }
+          ]
+        })
+      },
+      {
+        test: /\.css$/,
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: [{
+            loader: 'css-loader',
+            options: { minimize: true }
+          }]
+        })
       }
     ]
   },
-  plugins: [],
+  plugins: [
+    new ExtractTextPlugin('bundle.css')
+  ],
   devtool: "source-map",
   mode: "development",
   node: {

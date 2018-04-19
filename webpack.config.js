@@ -2,15 +2,15 @@ const path = require('path');
 const nodeExternals = require('webpack-node-externals');
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
-
 const config = {
   entry: {
-    server: "./server/app.ts",
-    client: "./client/index.ts"
+    "server.js": "./server/app.ts",
+    "public/index.js": "./client/index.ts",
+    "public/style.css": "./client/style.css"
   },
   output: {
     path: path.resolve(__dirname, "dist"),
-    filename: "[name].bundle.js"
+    filename: "[name]"
   },
   resolve: {
     extensions: [".ts", ".js", "css", "scss"],
@@ -56,7 +56,7 @@ const config = {
     ]
   },
   plugins: [
-    new ExtractTextPlugin('bundle.css')
+    new ExtractTextPlugin('public/style.css')
   ],
   devtool: "source-map",
   mode: "development",

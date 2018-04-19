@@ -1,7 +1,14 @@
 #!/bin/bash
 
+echo "CIV-CLONE-NODE: clearing dist/"
+
 /bin/rm -f dist/* &> /dev/null
 /bin/rm -f dist/public/* &> /dev/null
 
+echo "CIV-CLONE-NODE: compiling webpack"
+
 ./node_modules/.bin/webpack
+
+echo "CIV-CLONE-NODE: launching node server"
+
 node dist/server.js

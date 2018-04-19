@@ -1,4 +1,4 @@
 node_modules
 dist/*
-dist/public/*
-!dist/public
+!dist/public/.keep
+!dist/.keep

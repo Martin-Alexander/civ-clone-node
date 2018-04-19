@@ -5,8 +5,8 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const config = {
   entry: {
     "server.js": "./server/app.ts",
-    "public/index.js": "./client/index.ts",
-    "public/style.css": "./client/style.css"
+    "public/index.js": "./client/javascript/application.ts",
+    "public/style.css": "./client/stylesheets/application.css"
   },
   output: {
     path: path.resolve(__dirname, "dist"),
